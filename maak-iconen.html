@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Iconen genereren — Imparo l'Italiano</title>
+  <style>
+    body { font-family: sans-serif; padding: 30px; background: #E8F4F8; color: #1A3A5C; }
+    h1 { font-size: 1.4rem; margin-bottom: 6px; }
+    p  { font-size: 0.9rem; color: #4A6B8A; margin-bottom: 24px; }
+    .icons { display: flex; gap: 40px; flex-wrap: wrap; margin-bottom: 30px; align-items: flex-end; }
+    .icon-wrap { text-align: center; }
+    .icon-wrap span { display: block; font-size: 0.8rem; color: #6B7280; margin-top: 8px; }
+    button {
+      background: #1E6FA6; color: white; border: none; border-radius: 10px;
+      padding: 12px 24px; font-size: 1rem; cursor: pointer; margin-right: 12px; margin-top: 8px;
+    }
+    button:hover { background: #1A3A5C; }
+    .stap { background: white; border-radius: 12px; padding: 16px 20px; margin-top: 24px;
+            border-left: 4px solid #1E6FA6; font-size: 0.88rem; line-height: 1.7; }
+    .stap strong { color: #1A3A5C; }
+  </style>
+</head>
+<body>
+  <h1>Imparo l'Italiano — Iconen genereren</h1>
+  <p>Klik op de knoppen om de iconen te downloaden en volg daarna de stappen.</p>
+
+  <div class="icons">
+    <div class="icon-wrap">
+      <canvas id="canvas192" width="192" height="192"></canvas>
+      <span>192 × 192 px</span>
+    </div>
+    <div class="icon-wrap">
+      <canvas id="canvas512" width="512" height="512"></canvas>
+      <span>512 × 512 px</span>
+    </div>
+  </div>
+
+  <button onclick="download(192)">⬇ Download icon-192.png</button>
+  <button onclick="download(512)">⬇ Download icon-512.png</button>
+
+  <div class="stap">
+    <strong>Wat te doen na het downloaden:</strong><br>
+    1. Sla beide PNG-bestanden op in de map <code>imparo-litaliano/icons/</code> op je pc<br>
+    2. Upload beide bestanden naar de <code>icons/</code> map in je GitHub repository<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;→ Ga naar github.com/Truusje13/imparo-litaliano → map <code>icons</code> → Bestand toevoegen → Upload<br>
+    3. Klaar — het logo verschijnt voortaan op je telefoon-startscherm
+  </div>
+
+  <script>
+    function tekenIcon(size) {
+      const canvas = document.getElementById('canvas' + size);
+      const ctx = canvas.getContext('2d');
+      const s = size;
+      const r = s * 0.18; // hoekradius
+
+      // Afgeronde achtergrond
+      ctx.beginPath();
+      ctx.moveTo(r, 0);
+      ctx.lineTo(s - r, 0);
+      ctx.quadraticCurveTo(s, 0, s, r);
+      ctx.lineTo(s, s - r);
+      ctx.quadraticCurveTo(s, s, s - r, s);
+      ctx.lineTo(r, s);
+      ctx.quadraticCurveTo(0, s, 0, s - r);
+      ctx.lineTo(0, r);
+      ctx.quadraticCurveTo(0, 0, r, 0);
+      ctx.closePath();
+
+      // Lucht gradient
+      const sky = ctx.createLinearGradient(0, 0, 0, s * 0.65);
+      sky.addColorStop(0,   '#7EC4E8');
+      sky.addColorStop(0.5, '#4A9BC4');
+      sky.addColorStop(1,   '#2E86B8');
+      ctx.fillStyle = sky;
+      ctx.fill();
+
+      // Bergen achtergrond (sneeuw)
+      ctx.fillStyle = '#C8DCE8';
+      ctx.beginPath();
+      ctx.moveTo(0, s * 0.55);
+      ctx.lineTo(s * 0.12, s * 0.28);
+      ctx.lineTo(s * 0.28, s * 0.45);
+      ctx.lineTo(s * 0.42, s * 0.18);
+      ctx.lineTo(s * 0.58, s * 0.38);
+      ctx.lineTo(s * 0.72, s * 0.22);
+      ctx.lineTo(s * 0.88, s * 0.40);
+      ctx.lineTo(s, s * 0.30);
+      ctx.lineTo(s, s * 0.58);
+      ctx.closePath();
+      ctx.fill();
+
+      // Sneeuwtoppen
+      ctx.fillStyle = '#F0F8FF';
+      ctx.beginPath();
+      ctx.moveTo(s * 0.42, s * 0.18);
+      ctx.lineTo(s * 0.35, s * 0.32);
+      ctx.lineTo(s * 0.49, s * 0.31);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(s * 0.72, s * 0.22);
+      ctx.lineTo(s * 0.65, s * 0.34);
+      ctx.lineTo(s * 0.79, s * 0.33);
+      ctx.closePath();
+      ctx.fill();
+
+      // Groene heuvels
+      ctx.fillStyle = '#4A7A30';
+      ctx.beginPath();
+      ctx.ellipse(s * 0.2, s * 0.68, s * 0.28, s * 0.16, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#5C8C3E';
+      ctx.beginPath();
+      ctx.ellipse(s * 0.82, s * 0.70, s * 0.26, s * 0.14, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Meer (lago)
+      const water = ctx.createLinearGradient(0, s * 0.62, 0, s);
+      water.addColorStop(0, '#2E86B8');
+      water.addColorStop(1, '#1A3A5C');
+      ctx.fillStyle = water;
+      ctx.beginPath();
+      ctx.rect(0, s * 0.62, s, s * 0.38);
+      ctx.fill();
+
+      // Lichtreflecties op water
+      ctx.fillStyle = 'rgba(255,255,255,0.18)';
+      ctx.beginPath(); ctx.ellipse(s*0.25, s*0.72, s*0.12, s*0.018, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(s*0.65, s*0.78, s*0.14, s*0.016, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(s*0.45, s*0.86, s*0.10, s*0.012, 0, 0, Math.PI*2); ctx.fill();
+
+      // Cipres-bomen rechts
+      ctx.fillStyle = '#1E4A18';
+      for (let i = 0; i < 3; i++) {
+        const x = s * (0.72 + i * 0.08);
+        const y = s * 0.58;
+        ctx.beginPath();
+        ctx.ellipse(x, y - s*0.06, s*0.022, s*0.09, 0, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      // Italiaanse vlagstreep onderaan
+      const stripeH = s * 0.055;
+      const stripeY = s - stripeH;
+      ctx.fillStyle = '#009246';
+      ctx.fillRect(0, stripeY, s/3, stripeH);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(s/3, stripeY, s/3, stripeH);
+      ctx.fillStyle = '#CE2B37';
+      ctx.fillRect(s*2/3, stripeY, s/3, stripeH);
+
+
+      // Clip afgeronde hoeken opnieuw toepassen
+      ctx.globalCompositeOperation = 'destination-in';
+      ctx.beginPath();
+      ctx.moveTo(r, 0);
+      ctx.lineTo(s - r, 0);
+      ctx.quadraticCurveTo(s, 0, s, r);
+      ctx.lineTo(s, s - r);
+      ctx.quadraticCurveTo(s, s, s - r, s);
+      ctx.lineTo(r, s);
+      ctx.quadraticCurveTo(0, s, 0, s - r);
+      ctx.lineTo(0, r);
+      ctx.quadraticCurveTo(0, 0, r, 0);
+      ctx.closePath();
+      ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    function download(size) {
+      const canvas = document.getElementById('canvas' + size);
+      const link = document.createElement('a');
+      link.download = 'icon-' + size + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    tekenIcon(192);
+    tekenIcon(512);
+  </script>
+</body>
+</html>
