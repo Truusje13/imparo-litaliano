@@ -2,7 +2,7 @@
   "name": "Imparo l'Italiano",
   "short_name": "Imparo",
   "description": "Leer Italiaans met flashcards en werkwoordoefeningen",
-  "start_url": "/index.html",
+  "start_url": "/imparo-litaliano/index.html",
   "display": "standalone",
   "background_color": "#E8F4F8",
   "theme_color": "#1A5276",
