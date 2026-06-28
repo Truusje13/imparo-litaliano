@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1A5276" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Imparo" />
+  <title>Imparo l'Italiano</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     LANDSCHAPSHEADER — Lago di Como
+     ══════════════════════════════════════ -->
+<div class="landscape-header">
+  <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <!-- Lucht gradient -->
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#A8CEE8"/>
+        <stop offset="60%"  stop-color="#6BAFD6"/>
+        <stop offset="100%" stop-color="#4A9BC4"/>
+      </linearGradient>
+      <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#2E86B8" stop-opacity="0.85"/>
+        <stop offset="100%" stop-color="#1A3A5C"/>
+      </linearGradient>
+      <linearGradient id="mountain-l" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#B0C8D8"/>
+        <stop offset="40%"  stop-color="#7A9FB5"/>
+        <stop offset="100%" stop-color="#4A6B8A"/>
+      </linearGradient>
+      <linearGradient id="mountain-r" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#C8D8E0"/>
+        <stop offset="35%"  stop-color="#8AAFC0"/>
+        <stop offset="100%" stop-color="#5A7A8A"/>
+      </linearGradient>
+      <linearGradient id="mtn-snow" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#F0F8FF"/>
+        <stop offset="100%" stop-color="#D0E8F0" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="hill-green" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#5C8C3E"/>
+        <stop offset="100%" stop-color="#3A6B28"/>
+      </linearGradient>
+      <linearGradient id="water-refl" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#3A9AC8" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#1A3A5C" stop-opacity="0.9"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Lucht -->
+    <rect width="400" height="220" fill="url(#sky)"/>
+
+    <!-- Verre bergen links — sneeuwtoppen -->
+    <polygon points="0,130 40,55 80,95 120,45 160,90 200,60 230,100 260,75 290,105 320,70 360,100 400,80 400,140 0,140"
+             fill="url(#mountain-l)" opacity="0.9"/>
+    <!-- Sneeuw caps -->
+    <polygon points="40,55 20,80 60,80" fill="url(#mtn-snow)" opacity="0.85"/>
+    <polygon points="120,45 100,75 140,72" fill="url(#mtn-snow)" opacity="0.9"/>
+    <polygon points="200,60 185,82 218,80" fill="url(#mtn-snow)" opacity="0.8"/>
+    <polygon points="320,70 305,92 338,90" fill="url(#mtn-snow)" opacity="0.75"/>
+
+    <!-- Middenplan bergen rechts — groener, dichter bij -->
+    <polygon points="0,145 50,108 100,125 160,100 220,120 280,98 340,118 400,102 400,160 0,160"
+             fill="url(#mountain-r)" opacity="0.95"/>
+
+    <!-- Groene heuvels met olijfbomen links -->
+    <ellipse cx="60" cy="165" rx="90" ry="40" fill="url(#hill-green)" opacity="0.9"/>
+    <!-- Olijfbomen silhouet links -->
+    <g fill="#2D5A1B" opacity="0.85">
+      <ellipse cx="18" cy="152" rx="7" ry="11"/>
+      <rect x="17" y="158" width="2" height="8"/>
+      <ellipse cx="38" cy="148" rx="6" ry="10"/>
+      <rect x="37" y="154" width="2" height="8"/>
+      <ellipse cx="56" cy="153" rx="7" ry="11"/>
+      <rect x="55" y="159" width="2" height="7"/>
+    </g>
+
+    <!-- Groene heuvels rechts -->
+    <ellipse cx="360" cy="168" rx="80" ry="38" fill="#4A7A30" opacity="0.85"/>
+    <!-- Cipres-bomen (typisch Italiaans) rechts -->
+    <g fill="#1E4A18" opacity="0.9">
+      <ellipse cx="330" cy="148" rx="4" ry="16"/>
+      <ellipse cx="344" cy="151" rx="4" ry="14"/>
+      <ellipse cx="358" cy="147" rx="4" ry="17"/>
+      <ellipse cx="372" cy="152" rx="3" ry="13"/>
+      <ellipse cx="384" cy="149" rx="4" ry="15"/>
+    </g>
+
+    <!-- Meer (lago) — breed en spiegelend -->
+    <rect x="0" y="162" width="400" height="58" fill="url(#water-refl)"/>
+
+    <!-- Lichtreflecties op het water -->
+    <g opacity="0.25" fill="white">
+      <ellipse cx="80"  cy="172" rx="30" ry="3"/>
+      <ellipse cx="200" cy="178" rx="45" ry="2.5"/>
+      <ellipse cx="330" cy="185" rx="28" ry="2"/>
+      <ellipse cx="150" cy="192" rx="20" ry="1.5"/>
+      <ellipse cx="280" cy="196" rx="25" ry="1.5"/>
+    </g>
+
+    <!-- Kleine bootjes op het meer -->
+    <g fill="white" opacity="0.85">
+      <!-- Boot 1 -->
+      <ellipse cx="110" cy="175" rx="12" ry="3"/>
+      <polygon points="108,172 110,164 112,172" fill="#CE2B37" opacity="0.8"/>
+      <!-- Boot 2 -->
+      <ellipse cx="260" cy="180" rx="10" ry="2.5"/>
+      <polygon points="258,177 260,170 262,177" fill="#009246" opacity="0.8"/>
+    </g>
+
+    <!-- Klein dorpje aan het oevermeer — typisch Varenna/Bellagio stijl -->
+    <g opacity="0.88">
+      <!-- Huisjes links -->
+      <rect x="140" y="153" width="10" height="10" fill="#E8C49A"/>
+      <polygon points="138,153 150,153 144,147" fill="#C4622D"/>
+      <rect x="153" y="155" width="9" height="8" fill="#F0D0A0"/>
+      <polygon points="151,155 163,155 157,149" fill="#A84E28"/>
+      <rect x="165" y="154" width="8" height="9" fill="#E8C49A"/>
+      <polygon points="163,154 174,154 168,148" fill="#C4622D"/>
+      <!-- Klokketoren -->
+      <rect x="178" y="147" width="6" height="16" fill="#D4C090"/>
+      <rect x="177" y="147" width="8" height="3" fill="#B8A870"/>
+      <polygon points="177,147 185,147 181,143" fill="#C4622D"/>
+    </g>
+
+    <!-- Kade / oeverrand -->
+    <rect x="120" y="163" width="80" height="3" fill="#C8A870" opacity="0.7"/>
+  </svg>
+
+  <div class="app-title-overlay">
+    <h1>Imparo l'Italiano</h1>
+    <p>Lago di Como · Dolomiti · Italia</p>
+  </div>
+</div>
+
+<!-- Italiaanse vlagstreep -->
+<div class="flag-stripe">
+  <span class="green"></span>
+  <span class="white"></span>
+  <span class="red"></span>
+</div>
+
+<!-- ══════════════════════════════════════
+     HOOFD-INHOUD
+     ══════════════════════════════════════ -->
+<main class="main-content">
+
+  <!-- HOME scherm -->
+  <div id="screen-home" class="screen active">
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-value" id="stat-xp">0</div>
+        <div class="stat-label">XP Punten</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🔥</div>
+        <div class="stat-value" id="stat-streak">0🔥</div>
+        <div class="stat-label">Streak</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🃏</div>
+        <div class="stat-value" id="stat-cards">0</div>
+        <div class="stat-label">Kaarten</div>
+      </div>
+    </div>
+
+    <div class="xp-bar-wrap">
+      <div class="xp-bar-header">
+        <span class="level-badge" id="level-badge">🌱 Principiante</span>
+        <span class="xp-text" id="xp-label">0 / 50 XP</span>
+      </div>
+      <div class="xp-track">
+        <div class="xp-fill" id="xp-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="section-title">🗺️ Kies een oefening</div>
+    <div class="menu-grid">
+      <div class="menu-card" onclick="showScreen('flashcards')">
+        <div class="card-icon">🃏</div>
+        <div class="card-title">Flashcards</div>
+        <div class="card-sub">Woordenschat</div>
+      </div>
+      <div class="menu-card" onclick="showScreen('verbs')">
+        <div class="card-icon">📝</div>
+        <div class="card-title">Werkwoorden</div>
+        <div class="card-sub">Vervoegingen</div>
+      </div>
+      <div class="menu-card" onclick="showScreen('fill')">
+        <div class="card-icon">✍️</div>
+        <div class="card-title">Invuloefening</div>
+        <div class="card-sub">Typ de vorm</div>
+      </div>
+      <div class="menu-card" onclick="showScreen('profile')">
+        <div class="card-icon">🏆</div>
+        <div class="card-title">Profiel</div>
+        <div class="card-sub">Prestaties</div>
+      </div>
+    </div>
+
+    <div class="section-title">💡 Woord van de dag</div>
+    <div id="word-of-day" style="background:white;border-radius:16px;padding:18px 16px;box-shadow:0 2px 8px rgba(26,58,92,0.12);border-left:4px solid #1E6FA6;">
+      <div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#1A3A5C;font-weight:700;" id="wod-it">il lago</div>
+      <div style="color:#6B7280;font-size:0.85rem;margin-top:4px;" id="wod-nl">het meer</div>
+      <div style="color:#5BACCF;font-size:0.78rem;margin-top:8px;font-style:italic;" id="wod-ex">Il lago di Como è bellissimo.</div>
+    </div>
+  </div>
+
+  <!-- FLASHCARDS scherm -->
+  <div id="screen-flashcards" class="screen">
+    <div class="category-scroll" id="cat-chips"></div>
+
+    <div class="fc-progress" id="fc-progress">1 / 12</div>
+
+    <div class="flashcard-container">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="card-face card-front">
+          <div class="card-lang" id="fc-front-lang">🇳🇱 Nederlands</div>
+          <div class="card-word" id="fc-front-word">huis</div>
+          <div class="card-tap-hint" id="tap-hint">Tik om te omdraaien</div>
+        </div>
+        <div class="card-face card-back">
+          <div class="card-lang" id="fc-back-lang">🇮🇹 Italiano</div>
+          <div class="card-word" id="fc-back-word">la casa</div>
+          <div class="card-hint" id="fc-example"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="judgment-btns" id="judgment-btns" style="display:none">
+      <button class="j-btn wrong"   onclick="judgeCard(0)"><span class="j-icon">😕</span>Fout</button>
+      <button class="j-btn unsure"  onclick="judgeCard(1)"><span class="j-icon">🤔</span>Twijfel</button>
+      <button class="j-btn correct" onclick="judgeCard(2)"><span class="j-icon">😄</span>Goed!</button>
+    </div>
+
+    <div style="text-align:center;margin-top:8px;">
+      <button onclick="fcDirection = fcDirection==='nl-it'?'it-nl':'nl-it'; renderFlashcard()"
+              style="background:none;border:1px solid #C8E8F5;border-radius:20px;padding:6px 14px;font-size:0.75rem;color:#1E6FA6;cursor:pointer;">
+        🔄 Omdraaien NL ↔ IT
+      </button>
+    </div>
+  </div>
+
+  <!-- WERKWOORDEN scherm -->
+  <div id="screen-verbs" class="screen">
+    <div class="verb-search">
+      <input type="text" id="verb-search-input" placeholder="Zoek een werkwoord…"
+             oninput="renderVerbList(this.value)" />
+    </div>
+    <div class="section-title">📚 Werkwoorden</div>
+    <div class="verb-list" id="verb-list"></div>
+  </div>
+
+  <!-- INVULOEFENING scherm -->
+  <div id="screen-fill" class="screen">
+    <div class="section-title" id="fill-verb-title">Kies eerst een werkwoord</div>
+    <div class="fc-progress" id="fill-progress"></div>
+
+    <div class="fill-card" id="fill-card">
+      <div class="fill-prompt" id="fill-prompt">Ga naar Werkwoorden en kies een werkwoord om te oefenen.</div>
+      <div class="fill-subject" id="fill-subject"></div>
+      <div class="fill-input-wrap" id="fill-input-wrap" style="display:none">
+        <input type="text" class="fill-input" id="fill-input"
+               placeholder="Type de vervoeging…"
+               onkeydown="if(event.key==='Enter') checkFillAnswer()" />
+        <button class="check-btn" onclick="checkFillAnswer()">✓</button>
+      </div>
+    </div>
+
+    <button class="practice-btn" onclick="showScreen('verbs')" style="margin-top:8px;">
+      📝 Kies een werkwoord
+    </button>
+  </div>
+
+  <!-- PROFIEL scherm -->
+  <div id="screen-profile" class="screen">
+    <div class="profile-header">
+      <div class="profile-avatar">🇮🇹</div>
+      <div class="profile-name">Il mio profilo</div>
+      <div class="profile-level" id="profile-level-name">🌱 Principiante</div>
+      <div style="font-size:0.75rem;opacity:0.7;margin-top:4px;" id="profile-xp-total">0 XP totaal</div>
+    </div>
+
+    <div class="section-title">🏅 Prestaties</div>
+    <div class="achievements-grid" id="achievements-grid"></div>
+
+    <div class="section-title" style="margin-top:8px;">📊 Statistieken</div>
+    <div style="background:white;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(26,58,92,0.12);">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:1.6rem;color:#1A3A5C;font-weight:700;" id="p-cards">0</div>
+          <div style="font-size:0.7rem;color:#6B7280;text-transform:uppercase;letter-spacing:.08em;">Kaarten bestudeerd</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:1.6rem;color:#1A3A5C;font-weight:700;" id="p-verbs">0</div>
+          <div style="font-size:0.7rem;color:#6B7280;text-transform:uppercase;letter-spacing:.08em;">Werkwoorden geoefend</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ══════════════════════════════════════
+     BOTTOM NAVIGATIE
+     ══════════════════════════════════════ -->
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-screen="home" onclick="showScreen('home')">
+    <span class="nav-icon">🏠</span>Home
+  </button>
+  <button class="nav-btn" data-screen="flashcards" onclick="showScreen('flashcards')">
+    <span class="nav-icon">🃏</span>Woorden
+  </button>
+  <button class="nav-btn" data-screen="verbs" onclick="showScreen('verbs')">
+    <span class="nav-icon">📝</span>Verba
+  </button>
+  <button class="nav-btn" data-screen="fill" onclick="showScreen('fill')">
+    <span class="nav-icon">✍️</span>Invullen
+  </button>
+  <button class="nav-btn" data-screen="profile" onclick="showScreen('profile')">
+    <span class="nav-icon">🏆</span>Profiel
+  </button>
+</nav>
+
+<!-- Vervoegingsmodal -->
+<div class="conj-modal-overlay" id="conj-modal" onclick="if(event.target===this)closeVerbModal()">
+  <div class="conj-modal">
+    <div class="conj-modal-header">
+      <div>
+        <h2 id="modal-verb-title">essere</h2>
+        <div style="color:#6B7280;font-size:0.82rem;" id="modal-verb-nl">zijn</div>
+      </div>
+      <button class="close-btn" onclick="closeVerbModal()">✕</button>
+    </div>
+    <div class="tense-tabs" id="tense-tabs"></div>
+    <table class="conj-table">
+      <tbody id="conj-tbody"></tbody>
+    </table>
+    <button class="practice-btn" onclick="startFillPractice()">
+      ✍️ Oefen invuloefening
+    </button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Scripts -->
+<script src="js/data.js"></script>
+<script src="js/gamification.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+  // Woord van de dag
+  const wods = [
+    { it: 'il lago', nl: 'het meer', ex: 'Il lago di Como è bellissimo.' },
+    { it: 'la montagna', nl: 'de berg', ex: 'Le montagne delle Dolomiti.' },
+    { it: 'il traghetto', nl: 'de ferry', ex: 'Il traghetto per Bellagio.' },
+    { it: 'la passeggiata', nl: 'de wandeling', ex: 'Una bella passeggiata lungo il lago.' },
+    { it: 'il tramonto', nl: 'de zonsondergang', ex: 'Che bel tramonto sul lago!' },
+    { it: 'la barca', nl: 'de boot', ex: 'Una barca sul lago.' },
+    { it: 'il vento', nl: 'de wind', ex: 'Il vento dal nord porta la pioggia.' },
+  ];
+  const wod = wods[new Date().getDay() % wods.length];
+  document.getElementById('wod-it').textContent = wod.it;
+  document.getElementById('wod-nl').textContent = wod.nl;
+  document.getElementById('wod-ex').textContent = wod.ex;
+
+  // Profiel statistieken live
+  const origRenderProfile = renderProfile;
+  function renderProfile() {
+    origRenderProfile();
+    document.getElementById('p-cards').textContent = stats.cardsStudied;
+    document.getElementById('p-verbs').textContent = stats.verbsPracticed;
+  }
+
+  // Invuloefening input tonen zodra oefening actief is
+  function initFillPractice(verb, tense) {
+    fillExercises = [...(verb.tenses[tense] || [])].sort(() => Math.random() - 0.5);
+    fillIndex = 0;
+    document.getElementById('fill-input-wrap').style.display = 'flex';
+    renderFillExercise();
+    document.getElementById('fill-verb-title').textContent =
+      verb.infinitivo + ' — ' + { presente: 'Heden', passato: 'Verleden', futuro: 'Toekomst' }[tense];
+  }
+</script>
+</body>
+</html>
