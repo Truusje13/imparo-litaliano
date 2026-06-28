@@ -101,39 +101,57 @@ function renderCategoryChips() {
   });
 }
 
-function renderFlashcard() {
+function renderFlashcard(animate = false) {
   const card = fcDeck[fcIndex];
   if (!card) return;
 
-  const front = document.getElementById('fc-front-word');
-  const back  = document.getElementById('fc-back-word');
-  const frontLang = document.getElementById('fc-front-lang');
-  const backLang  = document.getElementById('fc-back-lang');
-  const example   = document.getElementById('fc-example');
-  const progress  = document.getElementById('fc-progress');
+  const el = document.getElementById('flashcard');
 
-  if (fcDirection === 'nl-it') {
-    frontLang.textContent = '🇳🇱 Nederlands';
-    backLang.textContent  = '🇮🇹 Italiano';
-    front.textContent = card.nl;
-    back.textContent  = card.it;
+  const updateContent = () => {
+    const front = document.getElementById('fc-front-word');
+    const back  = document.getElementById('fc-back-word');
+    const frontLang = document.getElementById('fc-front-lang');
+    const backLang  = document.getElementById('fc-back-lang');
+    const example   = document.getElementById('fc-example');
+    const progress  = document.getElementById('fc-progress');
+
+    if (fcDirection === 'nl-it') {
+      frontLang.textContent = '🇳🇱 Nederlands';
+      backLang.textContent  = '🇮🇹 Italiano';
+      front.textContent = card.nl;
+      back.textContent  = card.it;
+    } else {
+      frontLang.textContent = '🇮🇹 Italiano';
+      backLang.textContent  = '🇳🇱 Nederlands';
+      front.textContent = card.it;
+      back.textContent  = card.nl;
+    }
+
+    example.textContent = card.example || '';
+    progress.textContent = `${fcIndex + 1} / ${fcDeck.length}`;
+
+    fcFlipped = false;
+    el.classList.remove('flipped');
+    document.getElementById('judgment-btns').style.display = 'none';
+    document.getElementById('tap-hint').style.display = 'block';
+
+    if (animate) {
+      el.style.opacity = '1';
+      el.style.transform = 'scale(1)';
+    }
+  };
+
+  if (animate) {
+    el.style.transition = 'opacity 0.18s, transform 0.18s';
+    el.style.opacity = '0';
+    el.style.transform = 'scale(0.94)';
+    setTimeout(() => {
+      el.classList.remove('flipped');
+      updateContent();
+    }, 200);
   } else {
-    frontLang.textContent = '🇮🇹 Italiano';
-    backLang.textContent  = '🇳🇱 Nederlands';
-    front.textContent = card.it;
-    back.textContent  = card.nl;
+    updateContent();
   }
-
-  example.textContent = card.example || '';
-  progress.textContent = `${fcIndex + 1} / ${fcDeck.length}`;
-
-  // Reset flip
-  fcFlipped = false;
-  document.getElementById('flashcard').classList.remove('flipped');
-
-  // Toon/verberg oordeel-knoppen
-  document.getElementById('judgment-btns').style.display = 'none';
-  document.getElementById('tap-hint').style.display = 'block';
 }
 
 function flipCard() {
@@ -169,7 +187,7 @@ function judgeCard(quality) {
   if (quality === 2) showToast('+' + xp + ' XP ✨', 1200);
 
   fcIndex = (fcIndex + 1) % fcDeck.length;
-  renderFlashcard();
+  renderFlashcard(true);
 }
 
 // ── Werkwoorden ──
