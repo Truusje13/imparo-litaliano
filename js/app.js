@@ -15,6 +15,7 @@ let fcIndex = 0;
 let fcCategory = 'basis';
 let fcFlipped = false;
 let fcDirection = 'nl-it'; // 'nl-it' of 'it-nl'
+let fcSessionSeen = 0;
 
 // Werkwoord state
 let currentVerb = null;
@@ -76,6 +77,10 @@ function loadDeck(cat) {
   fcDeck.sort((a, b) => a.nextReview - b.nextReview);
   fcIndex = 0;
   fcFlipped = false;
+  fcSessionSeen = 0;
+
+  document.getElementById('flashcard-container').style.display = '';
+  document.getElementById('fc-deck-complete').style.display = 'none';
 }
 
 function loadCardProgress() {
@@ -188,8 +193,30 @@ function judgeCard(quality) {
   newOnes.forEach(a => showToast(a.icon + ' ' + a.name + ' ontgrendeld!'));
   if (quality === 2) showToast('+' + xp + ' XP ✨', 1200);
 
+  fcSessionSeen++;
+
+  if (fcSessionSeen >= fcDeck.length) {
+    showDeckComplete();
+    return;
+  }
+
   fcIndex = (fcIndex + 1) % fcDeck.length;
   renderFlashcard(true);
+}
+
+function showDeckComplete() {
+  const labels = { eten:'🍕 Eten', reizen:'✈️ Reizen', natuur:'🏔️ Natuur', basis:'👋 Basis', getallen:'🔢 Getallen' };
+  document.getElementById('flashcard-container').style.display = 'none';
+  document.getElementById('judgment-btns').style.display = 'none';
+  document.getElementById('fc-deck-complete').style.display = 'block';
+  document.getElementById('fc-complete-title').textContent = `${labels[fcCategory] || fcCategory} voltooid! 🎉`;
+  document.getElementById('fc-complete-sub').textContent = `Je hebt alle ${fcDeck.length} woorden gehad.`;
+}
+
+function restartDeck() {
+  loadDeck(fcCategory);
+  renderCategoryChips();
+  renderFlashcard();
 }
 
 // ── Werkwoorden ──

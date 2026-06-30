@@ -219,7 +219,7 @@
 
     <div class="fc-progress" id="fc-progress">1 / 12</div>
 
-    <div class="flashcard-container">
+    <div class="flashcard-container" id="flashcard-container">
       <div class="flashcard" id="flashcard" onclick="flipCard()">
         <div class="card-face card-front">
           <div class="card-lang" id="fc-front-lang">🇳🇱 Nederlands</div>
@@ -238,6 +238,13 @@
       <button class="j-btn wrong"   onclick="judgeCard(0)"><span class="j-icon">😕</span>Fout</button>
       <button class="j-btn unsure"  onclick="judgeCard(1)"><span class="j-icon">🤔</span>Twijfel</button>
       <button class="j-btn correct" onclick="judgeCard(2)"><span class="j-icon">😄</span>Goed!</button>
+    </div>
+
+    <div id="fc-deck-complete" style="display:none;text-align:center;background:white;border-radius:24px;padding:36px 24px;box-shadow:0 6px 24px rgba(26,58,92,0.18);border:2px solid #C8E8F5;">
+      <div style="font-size:3rem;margin-bottom:12px;">🏆</div>
+      <div id="fc-complete-title" style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#1A3A5C;font-weight:700;margin-bottom:6px;">Categorie voltooid! 🎉</div>
+      <div id="fc-complete-sub" style="font-size:0.85rem;color:#6B7280;margin-bottom:20px;">Je hebt alle woorden gehad.</div>
+      <button class="practice-btn" onclick="restartDeck()">🔁 Opnieuw oefenen</button>
     </div>
 
     <div style="text-align:center;margin-top:8px;">
