@@ -1,13 +1,12 @@
-const CACHE_NAME = 'imparo-v1';
+const CACHE_NAME = 'imparo-v2';
 const ASSETS = [
   '/',
   '/index.html',
   '/css/style.css',
   '/js/app.js',
   '/js/data.js',
-  '/js/flashcards.js',
-  '/js/verbs.js',
-  '/js/gamification.js'
+  '/js/gamification.js',
+  '/js/unlocks.js'
 ];
 
 self.addEventListener('install', e => {

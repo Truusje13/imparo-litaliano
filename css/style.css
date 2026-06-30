@@ -452,6 +452,14 @@ body {
   color: white;
 }
 
+.cat-chip.locked {
+  background: var(--lago-mist);
+  border-color: var(--lago-foam);
+  color: var(--monte-stone);
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
 /* ── Werkwoorden scherm ── */
 .verb-search {
   display: flex;

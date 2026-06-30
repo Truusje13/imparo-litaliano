@@ -65,7 +65,7 @@ function initFlashcards() {
 
 function loadDeck(cat) {
   fcCategory = cat;
-  const words = VOCABULARY[cat] || [];
+  const words = Unlocks.getUnlockedWords(cat, VOCABULARY[cat] || []);
   const saved = loadCardProgress();
 
   fcDeck = words.map(w => {
@@ -97,13 +97,23 @@ function saveCardProgress(card) {
 function renderCategoryChips() {
   const wrap = document.getElementById('cat-chips');
   wrap.innerHTML = '';
-  Object.keys(VOCABULARY).forEach(cat => {
+  Unlocks.getUnlockedCategories().forEach(cat => {
     const chip = document.createElement('button');
     chip.className = 'cat-chip' + (cat === fcCategory ? ' active' : '');
-    chip.textContent = { eten:'🍕 Eten', reizen:'✈️ Reizen', natuur:'🏔️ Natuur', basis:'👋 Basis', getallen:'🔢 Getallen' }[cat] || cat;
+    chip.textContent = Unlocks.CATEGORY_LABELS[cat] || cat;
     chip.onclick = () => { loadDeck(cat); renderCategoryChips(); renderFlashcard(); };
     wrap.appendChild(chip);
   });
+
+  const next = Unlocks.getNextLockedCategory();
+  if (next) {
+    const chip = document.createElement('button');
+    chip.className = 'cat-chip locked';
+    chip.disabled = true;
+    const label = Unlocks.CATEGORY_LABELS[next.key].replace(/^\S+\s/, '');
+    chip.textContent = `🔒 ${label} over ${next.daysLeft}d`;
+    wrap.appendChild(chip);
+  }
 }
 
 function renderFlashcard(animate = false) {
@@ -367,4 +377,12 @@ document.addEventListener('DOMContentLoaded', () => {
   stats = Gamification.checkStreak(stats);
   Gamification.save(stats);
   showScreen('home');
+
+  const unlock = Unlocks.checkForNewUnlocks();
+  if (unlock) {
+    const msg = unlock.type === 'category'
+      ? `🎉 Nieuwe categorie: ${unlock.label}!`
+      : `🎉 ${unlock.amount} nieuwe woorden ontgrendeld!`;
+    setTimeout(() => showToast(msg, 2500), 600);
+  }
 });

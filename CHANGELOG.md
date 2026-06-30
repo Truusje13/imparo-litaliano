@@ -100,9 +100,21 @@ Handgetekend SVG-landschap als paginaheader (400×220px), bestaande uit:
 - Nieuw scherm `#fc-deck-complete` toegevoegd: toont 🏆 "[Categorie] voltooid!" met aantal geleerde woorden en een knop "Opnieuw oefenen"
 - Scherm verschijnt zodra alle kaarten in de gekozen categorie één keer beoordeeld zijn
 
+### Groeiende woordenschat — dagelijkse woorden + geleidelijke categorieën — 30 juni 2026
+- Woordenbank flink uitgebreid: de 5 bestaande categorieën (`eten`, `reizen`, `natuur`, `basis`, `getallen`) gaan van ~12 naar **30 woorden** elk
+- 5 nieuwe categorieën toegevoegd, elk met **25 woorden**: 🎨 Kleuren, 👨‍👩‍👧 Familie, 🧍 Lichaam, 👕 Kleding, ☁️ Weer
+- Nieuw bestand `js/unlocks.js` (`Unlocks`-module) bijgehouden, vergelijkbaar opgezet als `Gamification`:
+  - Startdatum wordt bij eerste gebruik opgeslagen in `localStorage` (`imparo_start_date`)
+  - Per categorie zijn dag 0 standaard 10 woorden zichtbaar, +2 per dag erbij, tot het maximum van de pool (dag 10 = alle 30/25 woorden)
+  - De 5 bestaande categorieën zijn direct beschikbaar; de 5 nieuwe categorieën ontgrendelen één voor één, elke 6 dagen
+- `loadDeck()` en `renderCategoryChips()` in `js/app.js` gebruiken nu `Unlocks.getUnlockedWords()` en `Unlocks.getUnlockedCategories()` in plaats van de volledige woordenbank
+- Vergrendelde categorie-chip toegevoegd (grijs, niet-klikbaar) die toont welke categorie als volgende ontgrendelt en over hoeveel dagen — nieuwe CSS-klasse `.cat-chip.locked` in `css/style.css`
+- Toast-melding bij het openen van de app als er sinds het laatste bezoek nieuwe woorden of een nieuwe categorie zijn vrijgekomen (bv. "🎉 Nieuwe categorie: Kleuren!")
+- `sw.js` cache-versie opgehoogd naar `imparo-v2` en bestandenlijst opgeschoond (verwijzingen naar niet-bestaande `flashcards.js`/`verbs.js` verwijderd, `unlocks.js` toegevoegd)
+- Getest door `imparo_start_date` te manipuleren via `localStorage` (dag 0, 10, 35) — woordaantallen en categorie-ontgrendeling kloppen op elk getest moment
+
 ---
 
 *Volgende stappen (gepland):*
 - Meer werkwoorden toevoegen
-- Meer woordcategorieën (kleuren, familie, lichaamsdelen)
 - Uitspraaknotities toevoegen per woord
