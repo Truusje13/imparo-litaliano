@@ -77,10 +77,32 @@ Handgetekend SVG-landschap als paginaheader (400×220px), bestaande uit:
 - App live op: **`https://truusje13.github.io/imparo-litaliano/`**
 - Installeerbaar als PWA op telefoon via Chrome → menu → "Toevoegen aan startscherm"
 
+### Logo & PWA-iconen — 30 juni 2026
+- Tool `maak-iconen.html` gebouwd: genereert app-icoon (192px en 512px) via Canvas, in stijl van het Lago di Como-landschap met besneeuwde bergen, cipres-bomen en Italiaanse vlagstreep
+- Letters ("IL") uit het logo verwijderd op verzoek — puur landschap-icoon
+- Iconen geüpload naar GitHub-repository (hoofdmap, bestandsnamen `icon-192 (1).png` / `icon-512 (1).png`)
+- `manifest.json` bijgewerkt met juiste icoonpaden en `start_url` aangepast naar `/imparo-litaliano/index.html` (nodig voor GitHub Pages subpad)
+
+### Git-koppeling lokaal project ↔ GitHub — 30 juni 2026
+- Lokale map gekoppeld aan GitHub-repository via Personal Access Token, zodat wijzigingen direct gepusht kunnen worden zonder handmatige upload
+- Token wordt opgeslagen buiten de chat (in `token.txt` in de zandbak) om herhaaldelijk delen in gesprekken te vermijden
+- Eerste push uitgevoerd, samenvoegingsconflict in `manifest.json` opgelost (lokale en GitHub-versie liepen uiteen)
+
+### Bugfix — flashcard toonde antwoord van volgende kaart — 30 juni 2026
+- Probleem: bij het omdraaien van een kaart was het antwoord van de **volgende** kaart al zichtbaar
+- Oplossing: `renderFlashcard()` verbergt de kaart kort (fade-out) voordat de nieuwe inhoud geladen wordt, zodat er nooit doorheen geschemerd kan worden
+- Vervolgbug: de fix gebruikte een inline `transform: scale(1)` die de flip-animatie blokkeerde (inline stijl overschreef de CSS-klasse `.flipped`) — woord bleef altijd Nederlands tonen
+- Definitieve fix: alleen `opacity` gebruikt voor de overgang, inline stijlen na afloop weer verwijderd zodat de CSS-flip-klasse weer de controle heeft
+
+### Afsluitscherm na volledige set — 30 juni 2026
+- Probleem: flashcards bleven oneindig doorlopen (`fcIndex % fcDeck.length`) zonder enige aanduiding dat alle woorden al gehad waren
+- `fcSessionSeen` teller toegevoegd die bijhoudt hoeveel kaarten in de huidige sessie beoordeeld zijn
+- Nieuw scherm `#fc-deck-complete` toegevoegd: toont 🏆 "[Categorie] voltooid!" met aantal geleerde woorden en een knop "Opnieuw oefenen"
+- Scherm verschijnt zodra alle kaarten in de gekozen categorie één keer beoordeeld zijn
+
 ---
 
 *Volgende stappen (gepland):*
-- Icoontjes aanmaken voor PWA (`icons/icon-192.png`, `icons/icon-512.png`)
 - Meer werkwoorden toevoegen
 - Meer woordcategorieën (kleuren, familie, lichaamsdelen)
 - Uitspraaknotities toevoegen per woord
