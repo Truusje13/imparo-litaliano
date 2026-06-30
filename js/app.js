@@ -84,14 +84,13 @@ function loadDeck(cat) {
 }
 
 function loadCardProgress() {
-  const raw = localStorage.getItem('imparo_cards');
-  return raw ? JSON.parse(raw) : {};
+  return AppStorage.safeGet(AppStorage.KEYS.cards, {});
 }
 
 function saveCardProgress(card) {
   const all = loadCardProgress();
   all[fcCategory + ':' + card.it] = card;
-  localStorage.setItem('imparo_cards', JSON.stringify(all));
+  AppStorage.safeSet(AppStorage.KEYS.cards, all);
 }
 
 function renderCategoryChips() {
@@ -362,6 +361,48 @@ function renderProfile() {
     div.innerHTML = `<div class="ach-icon">${ach.icon}</div><div class="ach-name">${ach.name}</div><div class="ach-sub">${ach.sub}</div>`;
     grid.appendChild(div);
   });
+}
+
+// ── Back-up: voortgang exporteren/importeren ──
+function exportProgress() {
+  const payload = AppStorage.exportAll();
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const dateStr = new Date().toISOString().slice(0, 10);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `imparo-voortgang-${dateStr}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  showToast('📥 Voortgang geëxporteerd!');
+}
+
+function triggerImport() {
+  document.getElementById('import-file-input').click();
+}
+
+function importProgress(fileInput) {
+  const file = fileInput.files && fileInput.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const payload = JSON.parse(reader.result);
+      AppStorage.importAll(payload);
+
+      stats = Gamification.load();
+      renderHome();
+      renderProfile();
+      showToast('📤 Voortgang hersteld!');
+    } catch (e) {
+      showToast('⚠️ Kon bestand niet lezen', 2500);
+    }
+    fileInput.value = '';
+  };
+  reader.readAsText(file);
 }
 
 // ── Toast ──

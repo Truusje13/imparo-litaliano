@@ -15,10 +15,10 @@ const Unlocks = {
   },
 
   getStartDate() {
-    let raw = localStorage.getItem('imparo_start_date');
+    let raw = AppStorage.safeGetString(AppStorage.KEYS.startDate, null);
     if (!raw) {
       raw = new Date().toISOString().slice(0, 10);
-      localStorage.setItem('imparo_start_date', raw);
+      AppStorage.safeSetString(AppStorage.KEYS.startDate, raw);
     }
     return new Date(raw + 'T00:00:00');
   },
@@ -61,12 +61,12 @@ const Unlocks = {
   // Geeft true terug als er sinds het laatste bezoek nieuwe content is vrijgekomen
   checkForNewUnlocks() {
     const todayStr = new Date().toISOString().slice(0, 10);
-    const lastSeen = localStorage.getItem('imparo_last_seen_date');
+    const lastSeen = AppStorage.safeGetString(AppStorage.KEYS.lastSeen, null);
 
     if (lastSeen === todayStr) return null;
 
     const wasFirstVisit = !lastSeen;
-    localStorage.setItem('imparo_last_seen_date', todayStr);
+    AppStorage.safeSetString(AppStorage.KEYS.lastSeen, todayStr);
     if (wasFirstVisit) return null;
 
     const days = this.getDaysSinceStart();

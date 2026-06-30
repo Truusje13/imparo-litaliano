@@ -1,8 +1,9 @@
-const CACHE_NAME = 'imparo-v2';
+const CACHE_NAME = 'imparo-v3';
 const ASSETS = [
   '/',
   '/index.html',
   '/css/style.css',
+  '/js/storage.js',
   '/js/app.js',
   '/js/data.js',
   '/js/gamification.js',

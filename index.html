@@ -311,6 +311,18 @@
         </div>
       </div>
     </div>
+
+    <div class="section-title" style="margin-top:8px;">💾 Voortgang bewaren</div>
+    <div style="background:white;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(26,58,92,0.12);">
+      <p style="font-size:0.78rem;color:#6B7280;margin-bottom:12px;line-height:1.5;">
+        Maak af en toe een back-up van je voortgang (bijv. mail het bestand naar jezelf). Mocht er ooit iets misgaan, dan kun je je voortgang hiermee altijd terugzetten.
+      </p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="check-btn" style="flex:1;" onclick="exportProgress()">📥 Exporteren</button>
+        <button class="check-btn" style="flex:1;background:#5C7A3E;" onclick="triggerImport()">📤 Importeren</button>
+      </div>
+      <input type="file" id="import-file-input" accept="application/json" style="display:none" onchange="importProgress(this)" />
+    </div>
   </div>
 
 </main>
@@ -360,6 +372,7 @@
 <div class="toast" id="toast"></div>
 
 <!-- Scripts -->
+<script src="js/storage.js"></script>
 <script src="js/data.js"></script>
 <script src="js/gamification.js"></script>
 <script src="js/unlocks.js"></script>

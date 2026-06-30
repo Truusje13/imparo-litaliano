@@ -113,6 +113,20 @@ Handgetekend SVG-landschap als paginaheader (400×220px), bestaande uit:
 - `sw.js` cache-versie opgehoogd naar `imparo-v2` en bestandenlijst opgeschoond (verwijzingen naar niet-bestaande `flashcards.js`/`verbs.js` verwijderd, `unlocks.js` toegevoegd)
 - Getest door `imparo_start_date` te manipuleren via `localStorage` (dag 0, 10, 35) — woordaantallen en categorie-ontgrendeling kloppen op elk getest moment
 
+### Voortgang beveiligen tegen verlies bij updates — 30 juni 2026
+- Aanleiding: de gebruiker heeft bij andere apps meegemaakt dat voortgang soms verloren ging na een update — alle directe, ongestructureerde `localStorage`-aanroepen in dit project waren kwetsbaar voor precies dat probleem
+- Nieuw bestand `js/storage.js` (`AppStorage`-module): centrale opslaglaag die alle `localStorage`-toegang bundelt
+  - `STORAGE_KEYS` legt alle sleutelnamen op één plek vast — toekomstige wijzigingen moeten hier altijd doorheen, nooit een nieuwe rauwe string elders verzinnen
+  - `safeGet`/`safeSet`/`safeGetString`/`safeSetString` vangen alle fouten op (corrupte JSON, volle opslag, privémodus) en vallen netjes terug op een standaardwaarde in plaats van te crashen
+  - Let op: de module heet bewust `AppStorage` en niet `Storage` — die laatste naam is een gereserveerde, ingebouwde browser-interface en veroorzaakte een stille naamsbotsing tijdens het bouwen (functies bleken niet te bestaan ondanks correcte code)
+- `js/gamification.js`, `js/app.js` (kaartvoortgang) en `js/unlocks.js` (datums) omgebouwd om via `AppStorage` te lezen/schrijven in plaats van rechtstreeks `localStorage` aan te roepen
+- Nieuwe back-upfunctie op het Profielscherm:
+  - **"📥 Exporteren"** downloadt alle voortgang (XP, streak, prestaties, kaartvoortgang, ontgrendelde dagen) als één JSON-bestand (`imparo-voortgang-JJJJ-MM-DD.json`)
+  - **"📤 Importeren"** leest zo'n bestand terug in en herstelt de voortgang direct zichtbaar
+  - Bedoeld als vangnet voor situaties die geen enkele code kan voorkomen: browserdata die handmatig gewist wordt, een nieuwe browser/telefoon, of het verwijderen van de PWA
+- `sw.js` cache-versie opgehoogd naar `imparo-v3`, `storage.js` toegevoegd aan de cachelijst
+- Getest: volledige cyclus (voortgang opbouwen → exporteren → `localStorage.clear()` → importeren) — XP, kaarten en startdatum kwamen exact overeen na herstel; corrupte data in `localStorage` veroorzaakte geen crash maar een nette fallback naar standaardwaarden
+
 ---
 
 *Volgende stappen (gepland):*

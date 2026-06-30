@@ -21,8 +21,7 @@ const Gamification = {
   ],
 
   load() {
-    const raw = localStorage.getItem('imparo_stats');
-    return raw ? JSON.parse(raw) : {
+    return AppStorage.safeGet(AppStorage.KEYS.stats, {
       totalXP: 0,
       cardsStudied: 0,
       verbsPracticed: 0,
@@ -32,11 +31,11 @@ const Gamification = {
       correctStreak: 0,
       unlockedAchievements: [],
       completedCategories: [],
-    };
+    });
   },
 
   save(stats) {
-    localStorage.setItem('imparo_stats', JSON.stringify(stats));
+    AppStorage.safeSet(AppStorage.KEYS.stats, stats);
   },
 
   addXP(stats, amount) {
