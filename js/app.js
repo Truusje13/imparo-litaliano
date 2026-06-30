@@ -137,14 +137,16 @@ function renderFlashcard(animate = false) {
 
     if (animate) {
       el.style.opacity = '1';
-      el.style.transform = 'scale(1)';
+      setTimeout(() => {
+        el.style.transition = '';
+        el.style.opacity = '';
+      }, 180);
     }
   };
 
   if (animate) {
-    el.style.transition = 'opacity 0.18s, transform 0.18s';
+    el.style.transition = 'opacity 0.18s';
     el.style.opacity = '0';
-    el.style.transform = 'scale(0.94)';
     setTimeout(() => {
       el.classList.remove('flipped');
       updateContent();
